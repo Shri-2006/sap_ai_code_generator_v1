@@ -1,0 +1,82 @@
+{
+  "name": "sap-coder",
+  "displayName": "SAP Coder",
+  "description": "AI coding agent powered by SAP AI Core — four-model pipeline",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:sapCoder.run"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sapCoder.run",
+        "title": "SAP Coder: Run Task"
+      },
+      {
+        "command": "sapCoder.openPanel",
+        "title": "SAP Coder: Open Panel"
+      },
+      {
+        "command": "sapCoder.setModel",
+        "title": "SAP Coder: Change Model"
+      }
+    ],
+    "configuration": {
+      "title": "SAP Coder",
+      "properties": {
+        "sapCoder.backendUrl": {
+          "type": "string",
+          "default": "http://localhost:3000",
+          "description": "URL of the SAP Coder backend server"
+        },
+        "sapCoder.defaultModels": {
+          "type": "object",
+          "default": {
+            "promptEngineer": "claude-sonnet-4-6",
+            "codeGenerator": "claude-opus-4-6",
+            "codeChecker": "claude-opus-4-6",
+            "finalCheck": "claude-haiku-4-5-20251001"
+          }
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sapCoder",
+          "title": "SAP Coder",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "sapCoder": [
+        {
+          "type": "webview",
+          "id": "sapCoder.panel",
+          "name": "Pipeline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/uuid": "^11.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "uuid": "^14.0.0"
+  }
+}
